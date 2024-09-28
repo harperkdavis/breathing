@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Box Breathing</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        * {
+            font-family: monospace;
+        }
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            image-rendering: pixelated;
+        }
+        
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: sans-serif;
+            font-size: 24px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .breathing {
+            width: 290px;
+            height: 290px;
+            position: relative;
+
+            --border-angle: 0turn;
+            --gradient-border: conic-gradient(from var(--border-angle), transparent 90%, #fff 99%, transparent);
+            background-position: center center;
+            background: var(--gradient-border);
+
+            animation: breathing 16s infinite linear;
+        }
+
+        .text {
+            font-size: large;
+            text-align: center;
+            margin: 0;
+            line-height: 0;
+        }
+
+        .text.one {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .text.three {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .text.two {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+
+        .text.four {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+
+        @property --border-angle {
+            syntax: '<angle>';
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        @keyframes breathing {
+            to {
+                --border-angle: 1turn;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script src="noise.js"></script>
+    <script src="twgl.js"></script>
+    <script src="box.js"></script>
+    <canvas></canvas>
+    <div class="box">
+        <div class="breathing">
+            <p class="text one">HOLD</p>
+            <p class="text two">BREATHE IN</p>
+            <p class="text three">HOLD</p>
+            <p class="text four">BREATHE OUT</p>
+        </div>
+    </div>
+</body>
+</html>
